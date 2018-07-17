@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="chinese (simplified)">
+
+<head>
+  <!-- Required meta tags always come first -->
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>My super title | 留水声
+</title>
+  <link rel="canonical" href="/my-super-post.html">
+
+
+
+  <link rel="stylesheet" href="/theme/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/theme/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/theme/css/pygments/default.min.css">
+  <link rel="stylesheet" href="/theme/css/style.css">
+
+
+<meta name="description" content="Short version for index and feeds">
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1 class="title"><a href="">留水声</a></h1>
+          <p class="text-muted">光阴似水声，迢迢去未停。在此记录那流水声，能否留水声?</p>
+          <ul class="list-inline">
+            <li class="list-inline-item"><a href="/" target="_blank">首页</a></li>
+            <li class="list-inline-item"><a href="/archives.html" target="_blank">归档</a></li>
+            <li class="list-inline-item"><a href="/categories.html" target="_blank">分类</a></li>
+            <li class="list-inline-item"><a href="/tags.html" target="_blank">标签</a></li>
+            <li class="list-inline-item"><a href="/about.html" target="_blank">关于</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main">
+    <div class="container">
+      <h1>My super title
+</h1>
+      <hr>
+<article class="article">
+  <header>
+    <ul class="list-inline">
+      <li class="list-inline-item text-muted" title="2010-12-03T10:20:00+08:00">
+        <i class="fa fa-clock-o"></i>
+        周五 03 十二月 2010
+      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/category/python.html">Python</a>
+      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-files-o"></i>
+        <a href="/tag/pelican.html">#pelican</a>,         <a href="/tag/publishing.html">#publishing</a>      </li>
+    </ul>
+  </header>
+  <div class="content">
+    <h3>1.下载和安装</h3>
+<div class="highlight"><pre><span></span>    pip install flask
+</pre></div>
+
+
+<h3>2. 基本使用</h3>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>  <span class="c1"># 路由</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s1">&#39;&lt;h1&gt;Hello World!&lt;/h1&gt;&#39;</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>  <span class="c1"># 调试模式开启</span>
+</pre></div>
+
+
+<h3>3. 请求和响应</h3>
+<h4>3.1 请求对象</h4>
+<ul>
+<li>请求request  </li>
+</ul>
+<div class="highlight"><pre><span></span>    <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">request</span>  
+    <span class="n">user_agent</span> <span class="err">：</span> <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<ul>
+<li>
+<p>响应response  </p>
+<ul>
+<li>直接响应<br>
+<code>return '&lt;p&gt;Hello word!&lt;/p&gt;'</code><br>
+或<br>
+<code>return '&lt;p&gt;Erro 400 &lt;/p&gt;' , 400</code></li>
+</ul>
+</li>
+</ul>
+<h3>4. 数据库</h3>
+<p>可以选择python原始数据库扩展，或者ORM扩展，如SQLAlchemy。
+当然最简便的是使用专为Flask的flask-SQLAlchemy扩展。</p>
+<h4>4.1 Flask-SQLAlchemy</h4>
+<ul>
+<li>安装<br>
+<code>pip install flask-sqlalchemy</code>  </li>
+</ul>
+<h2>- 安装配置数据库</h2>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">current_app</span>  
+<span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>  
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>  
+<span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SQLALCHEMY_DATABASE_URI&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sqlite:////blog.db&#39;</span>  
+<span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SQLALCHEMY_TRACK_MODIFICATIONS&#39;</span><span class="p">]</span><span class="o">=</span><span class="bp">True</span>  
+<span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">(</span><span class="n">current_app</span><span class="p">)</span>
+</pre></div>
+  </div>
+</article>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+       
+        <p class="col-sm-6 text-sm-right text-muted">
+         <a href="https://github.com/getpelican/pelican" target="_blank">github</a>|<a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">ins</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

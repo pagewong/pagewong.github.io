@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="蜂鸣器发声使用winsound的模块12345678910import winsounddef sos():     for i in range(0, 3):         winsound.Beep(2000, 100)     for i in range(0, 3):         winsound.Beep(2000, 400)     for i in range(0, 3):">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python在Windows下的实用小脚本">
+<meta property="og:url" content="http://127.0.0.1/Python/Python在Windows下的实用小脚本/index.html">
+<meta property="og:site_name" content="留水声">
+<meta property="og:description" content="蜂鸣器发声使用winsound的模块12345678910import winsounddef sos():     for i in range(0, 3):         winsound.Beep(2000, 100)     for i in range(0, 3):         winsound.Beep(2000, 400)     for i in range(0, 3):">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-03-03T16:00:45.715Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python在Windows下的实用小脚本">
+<meta name="twitter:description" content="蜂鸣器发声使用winsound的模块12345678910import winsounddef sos():     for i in range(0, 3):         winsound.Beep(2000, 100)     for i in range(0, 3):         winsound.Beep(2000, 400)     for i in range(0, 3):">
+
+
+
+
+
+
+  <link rel="canonical" href="http://127.0.0.1/Python/Python在Windows下的实用小脚本/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Python在Windows下的实用小脚本 | 留水声</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">留水声</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://127.0.0.1/Python/Python在Windows下的实用小脚本/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Page Wang">
+      <meta itemprop="description" content="光阴似水声，迢迢去未停。用文字留住点滴水声。">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="留水声">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python在Windows下的实用小脚本
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-02-03 23:29:33" itemprop="dateCreated datePublished" datetime="2018-02-03T23:29:33+08:00">2018-02-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-03-04 00:00:45" itemprop="dateModified" datetime="2019-03-04T00:00:45+08:00">2019-03-04</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="蜂鸣器发声"><a href="#蜂鸣器发声" class="headerlink" title="蜂鸣器发声"></a>蜂鸣器发声</h2><p>使用winsound的模块<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> winsound</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sos</span><span class="params">()</span>:</span> </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">3</span>): </span><br><span class="line">        winsound.Beep(<span class="number">2000</span>, <span class="number">100</span>) </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">3</span>): </span><br><span class="line">        winsound.Beep(<span class="number">2000</span>, <span class="number">400</span>) </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">3</span>): </span><br><span class="line">        winsound.Beep(<span class="number">2000</span>, <span class="number">100</span>)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    sos()</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h2 id="右下角弹出通知"><a href="#右下角弹出通知" class="headerlink" title="右下角弹出通知"></a>右下角弹出通知</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> win32api <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> win32gui <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> win32con</span><br><span class="line"><span class="keyword">import</span> sys, os</span><br><span class="line"><span class="keyword">import</span> struct</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WindowsBalloonTip</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, title, msg)</span>:</span></span><br><span class="line">        message_map = &#123;</span><br><span class="line">                win32con.WM_DESTROY: self.OnDestroy,</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment"># 注册窗口类.</span></span><br><span class="line">        wc = WNDCLASS()</span><br><span class="line">        hinst = wc.hInstance = GetModuleHandle(<span class="literal">None</span>)</span><br><span class="line">        wc.lpszClassName = <span class="string">"PythonTaskbar"</span></span><br><span class="line">        wc.lpfnWndProc = message_map <span class="comment"># could also specify a wndproc.</span></span><br><span class="line">        classAtom = RegisterClass(wc)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 创建窗口.</span></span><br><span class="line">        style = win32con.WS_OVERLAPPED | win32con.WS_SYSMENU</span><br><span class="line">        self.hwnd = CreateWindow( classAtom, <span class="string">"Taskbar"</span>, style, \</span><br><span class="line">                <span class="number">0</span>, <span class="number">0</span>, win32con.CW_USEDEFAULT, win32con.CW_USEDEFAULT, \</span><br><span class="line">                <span class="number">0</span>, <span class="number">0</span>, hinst, <span class="literal">None</span>)</span><br><span class="line">        UpdateWindow(self.hwnd)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 设置图标 balloontip.ico</span></span><br><span class="line">        iconPathName = os.path.abspath(os.path.join( sys.path[<span class="number">0</span>], <span class="string">"balloontip.ico"</span> ))</span><br><span class="line">        icon_flags = win32con.LR_LOADFROMFILE | win32con.LR_DEFAULTSIZE</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">           hicon = LoadImage(hinst, iconPathName, \</span><br><span class="line">                    win32con.IMAGE_ICON, <span class="number">0</span>, <span class="number">0</span>, icon_flags)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">          hicon = LoadIcon(<span class="number">0</span>, win32con.IDI_APPLICATION)</span><br><span class="line">          </span><br><span class="line">        flags = NIF_ICON | NIF_MESSAGE | NIF_TIP</span><br><span class="line">        nid = (self.hwnd, <span class="number">0</span>, flags, win32con.WM_USER+<span class="number">20</span>, hicon, <span class="string">"tooltip"</span>)</span><br><span class="line">        Shell_NotifyIcon(NIM_ADD, nid)</span><br><span class="line">        Shell_NotifyIcon(NIM_MODIFY, (self.hwnd, <span class="number">0</span>, NIF_INFO, win32con.WM_USER+<span class="number">20</span>, hicon, <span class="string">"Balloon tooltip"</span>,msg,<span class="number">2000</span>,title))</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 销毁窗口</span></span><br><span class="line">        time.sleep(<span class="number">10</span>)</span><br><span class="line">        DestroyWindow(self.hwnd)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">OnDestroy</span><span class="params">(self, hwnd, msg, wparam, lparam)</span>:</span></span><br><span class="line">        nid = (self.hwnd, <span class="number">0</span>)</span><br><span class="line">        Shell_NotifyIcon(NIM_DELETE, nid)</span><br><span class="line">        PostQuitMessage(<span class="number">0</span>) <span class="comment"># Terminate the app.</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">balloon_tip</span><span class="params">(title, msg)</span>:</span></span><br><span class="line">    w=WindowsBalloonTip(title, msg)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    balloon_tip(<span class="string">u"通知标题"</span>, <span class="string">u"这是一条通知信息"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="锁屏"><a href="#锁屏" class="headerlink" title="锁屏"></a>锁屏</h2><p>使用ctypes的模块<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ctypes</span><br><span class="line">ctypes.windll.user32.LockWorkStation()</span><br></pre></td></tr></table></figure></p>
+<h2 id="弹出窗口"><a href="#弹出窗口" class="headerlink" title="弹出窗口"></a>弹出窗口</h2><p>使用ctypes的模块<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">import</span> ctypes</span><br><span class="line">ctypes.windll.user32.MessageBoxW(<span class="number">0</span>, <span class="string">u'这是一条提醒信息'</span>, <span class="string">u'标题'</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/images/gzh05.jpg" alt="Page Wang wechat" style="width: 200px; max-width: 100%;">
+  <div>欢迎您扫一扫上面的微信公众号，或者搜索公众号"liushuisheng365",订阅我的博客！</div>
+</div>
+
+      </div>
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Page Wang">
+            
+              <p class="site-author-name" itemprop="name">Page Wang</p>
+              <div class="site-description motion-element" itemprop="description">光阴似水声，迢迢去未停。用文字留住点滴水声。</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/pagewong" title="GitHub &rarr; https://github.com/pagewong" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:pageone99@gmail.com" title="E-Mail &rarr; mailto:pageone99@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/pagewang6" title="Twitter &rarr; https://twitter.com/pagewang6" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://instagram.com/pagewong" title="Instagram &rarr; https://instagram.com/pagewong" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#蜂鸣器发声"><span class="nav-number">1.</span> <span class="nav-text">蜂鸣器发声</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#右下角弹出通知"><span class="nav-number">2.</span> <span class="nav-text">右下角弹出通知</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁屏"><span class="nav-number">3.</span> <span class="nav-text">锁屏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#弹出窗口"><span class="nav-number">4.</span> <span class="nav-text">弹出窗口</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user-circle-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Page Wang</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

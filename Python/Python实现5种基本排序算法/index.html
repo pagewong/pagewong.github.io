@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="冒泡排序（Bubble Sort）较简单的排序算法。 它重复地走访过要排序的元素列，依次比较两个相邻的元素，如果他们的顺序（如从大到小、首字母从A到Z）错误就把他们交换过来。 访问元素的工作是重复地进行，直到没有相邻元素需要交换，则已经排序完成。基本过程如下：  比较相邻的两个元素； 如果元素的顺序错误，则会交换元素； 重复遍历列表的未排序部分，直到列表被排序。由于“冒泡排序”反复比对列表中未排序">
+<meta name="keywords" content="数据结构与算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python实现5种基本排序算法">
+<meta property="og:url" content="http://127.0.0.1/Python/Python实现5种基本排序算法/index.html">
+<meta property="og:site_name" content="留水声">
+<meta property="og:description" content="冒泡排序（Bubble Sort）较简单的排序算法。 它重复地走访过要排序的元素列，依次比较两个相邻的元素，如果他们的顺序（如从大到小、首字母从A到Z）错误就把他们交换过来。 访问元素的工作是重复地进行，直到没有相邻元素需要交换，则已经排序完成。基本过程如下：  比较相邻的两个元素； 如果元素的顺序错误，则会交换元素； 重复遍历列表的未排序部分，直到列表被排序。由于“冒泡排序”反复比对列表中未排序">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://127.0.0.1/images/1/bubble_sort.gif">
+<meta property="og:image" content="http://127.0.0.1/images/1/selection_sort.gif">
+<meta property="og:image" content="http://127.0.0.1/images/1/Insertion_sort.gif">
+<meta property="og:image" content="http://127.0.0.1/images/1/Merge_Sort.gif">
+<meta property="og:image" content="http://127.0.0.1/images/1/quick_sort.gif">
+<meta property="og:updated_time" content="2019-03-17T13:32:25.446Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python实现5种基本排序算法">
+<meta name="twitter:description" content="冒泡排序（Bubble Sort）较简单的排序算法。 它重复地走访过要排序的元素列，依次比较两个相邻的元素，如果他们的顺序（如从大到小、首字母从A到Z）错误就把他们交换过来。 访问元素的工作是重复地进行，直到没有相邻元素需要交换，则已经排序完成。基本过程如下：  比较相邻的两个元素； 如果元素的顺序错误，则会交换元素； 重复遍历列表的未排序部分，直到列表被排序。由于“冒泡排序”反复比对列表中未排序">
+<meta name="twitter:image" content="http://127.0.0.1/images/1/bubble_sort.gif">
+
+
+
+
+
+
+  <link rel="canonical" href="http://127.0.0.1/Python/Python实现5种基本排序算法/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Python实现5种基本排序算法 | 留水声</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">留水声</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://127.0.0.1/Python/Python实现5种基本排序算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Page Wang">
+      <meta itemprop="description" content="光阴似水声，迢迢去未停。用文字留住点滴水声。">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="留水声">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python实现5种基本排序算法
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-17 21:27:37 / 修改时间：21:32:25" itemprop="dateCreated datePublished" datetime="2019-03-17T21:27:37+08:00">2019-03-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="冒泡排序（Bubble-Sort）"><a href="#冒泡排序（Bubble-Sort）" class="headerlink" title="冒泡排序（Bubble Sort）"></a>冒泡排序（Bubble Sort）</h2><p>较简单的排序算法。 它重复地走访过要排序的元素列，依次比较两个相邻的元素，如果他们的顺序（如从大到小、首字母从A到Z）错误就把他们交换过来。 访问元素的工作是重复地进行，直到没有相邻元素需要交换，则已经排序完成。基本过程如下：</p>
+<ul>
+<li>比较相邻的两个元素；</li>
+<li>如果元素的顺序错误，则会交换元素；</li>
+<li>重复遍历列表的未排序部分，直到列表被排序。<br>由于“冒泡排序”反复比对列表中未排序的部分，因此最坏情况的复杂度为：O(n²）  </li>
+</ul>
+<p><img src="/images/1/bubble_sort.gif" alt="bubble_sort">  </p>
+<a id="more"></a>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubble_sort</span><span class="params">(arr)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">swap</span><span class="params">(i, j)</span>:</span></span><br><span class="line">        arr[i], arr[j] = arr[j], arr[i]</span><br><span class="line"></span><br><span class="line">    n = len(arr)</span><br><span class="line">    swapped = <span class="literal">True</span></span><br><span class="line">    </span><br><span class="line">    x = <span class="number">-1</span></span><br><span class="line">    <span class="keyword">while</span> swapped:</span><br><span class="line">        swapped = <span class="literal">False</span></span><br><span class="line">        x = x + <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n-x):</span><br><span class="line">            <span class="keyword">if</span> arr[i - <span class="number">1</span>] &gt; arr[i]:</span><br><span class="line">                swap(i - <span class="number">1</span>, i)</span><br><span class="line">                swapped = <span class="literal">True</span></span><br><span class="line">                    </span><br><span class="line">    <span class="keyword">return</span> arr</span><br></pre></td></tr></table></figure>
+<h2 id="选择排序（Selection-Sort）"><a href="#选择排序（Selection-Sort）" class="headerlink" title="选择排序（Selection Sort）"></a>选择排序（Selection Sort）</h2><p>“选择排序”也很简单，但通常优于“冒泡排序”。<br>如果在两者之间进行选择，最好默认选择排序。<br>基本排序过程如下：</p>
+<ul>
+<li>把列表分为虚拟两部分：已排序部分和未排序部分；</li>
+<li>首先找到“未排序部分”中的最小元素，并将其放在“起始位置；此时“已排序部分”就有了一个元素。</li>
+<li>不断抓取剩余“未排序部分”最小的元素；放到“未排序部分”的最前面，也就是“已排序部分”的后面。</li>
+<li>重复迭代，直到列表完全排序。</li>
+</ul>
+<p><img src="/images/1/selection_sort.gif" alt="selection_sort">  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">selection_sort</span><span class="params">(arr)</span>:</span>        </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(arr)):</span><br><span class="line">        minimum = i</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i + <span class="number">1</span>, len(arr)):</span><br><span class="line">            <span class="comment"># 找出最小元素</span></span><br><span class="line">            <span class="keyword">if</span> arr[j] &lt; arr[minimum]:</span><br><span class="line">                minimum = j</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 放到列表“待排序部分”的最前面，“已排序”末端的后面</span></span><br><span class="line">        arr[minimum], arr[i] = arr[i], arr[minimum]</span><br><span class="line">            </span><br><span class="line">    <span class="keyword">return</span> arr</span><br></pre></td></tr></table></figure>
+<h2 id="插入排序（Insertion-Sort）"><a href="#插入排序（Insertion-Sort）" class="headerlink" title="插入排序（Insertion Sort）"></a>插入排序（Insertion Sort）</h2><p>相比“冒泡排序”和“选择排序”，“插入排序”更快且更简单。<br>“插入排序”出现在我们生活中玩扑克牌场景！我们抓牌的过程就是“插入排序”的过程。排序过程如下：</p>
+<ol>
+<li>从第一个元素开始，该元素可以认为已经被排序</li>
+<li>取出下一个元素，在已经排序的元素序列中从后向前扫描</li>
+<li>如果该元素（已排序）大于新元素，将该元素移到下一位置</li>
+<li>重复步骤3，直到找到已排序的元素小于或者等于新元素的位置</li>
+<li>将新元素插入到该位置后</li>
+<li>重复步骤2~5</li>
+</ol>
+<p><em>注：如果“比较操作”的代价比“交换操作”大的话，可以采用“二分查找法”来减少“比较操作”的数目。</em>  </p>
+<p><img src="/images/1/Insertion_sort.gif" alt="Insertion_sort">  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insertion_sort</span><span class="params">(arr, simulation=False)</span>:</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(arr)):</span><br><span class="line">        cursor = arr[i]</span><br><span class="line">        pos = i</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> pos &gt; <span class="number">0</span> <span class="keyword">and</span> arr[pos - <span class="number">1</span>] &gt; cursor:</span><br><span class="line">            <span class="comment"># Swap the number down the list</span></span><br><span class="line">            arr[pos] = arr[pos - <span class="number">1</span>]</span><br><span class="line">            pos = pos - <span class="number">1</span></span><br><span class="line">        <span class="comment"># Break and do the final swap</span></span><br><span class="line">        arr[pos] = cursor</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> arr</span><br></pre></td></tr></table></figure>
+<h2 id="归并排序（Merge-sort）"><a href="#归并排序（Merge-sort）" class="headerlink" title="归并排序（Merge sort）"></a>归并排序（Merge sort）</h2><p>是建立在归并操作上的一种有效的排序算法，效率為 （大O符号）。该算法是采用分治法（Divide and Conquer）的一个非常典型的应用，且各层分治递归可以同时进行。过程如下：</p>
+<ol>
+<li>连续划分未排序列表，直到有N个子列表，其中每个子列表有1个“未排序”元素，N是原始数组中元素的数量。 </li>
+<li>反复合并，即一次征服2个子列表，以产生新的排序子列表，直到所有元素完全合并为单个排序数组。  </li>
+</ol>
+<p><img src="/images/1/Merge_Sort.gif" alt="selection_sort.gif">  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge_sort</span><span class="params">(arr)</span>:</span></span><br><span class="line">  <span class="string">"""排序函数"""</span></span><br><span class="line">    <span class="comment"># 划分最后一个数组</span></span><br><span class="line">    <span class="keyword">if</span> len(arr) &lt;= <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> arr</span><br><span class="line">    mid = len(arr) // <span class="number">2</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 分别递归排序</span></span><br><span class="line">    left, right = merge_sort(arr[:mid]), merge_sort(arr[mid:])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 合并每一个子列表</span></span><br><span class="line">    <span class="keyword">return</span> merge(left, right, arr.copy())</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge</span><span class="params">(left, right, merged)</span>:</span></span><br><span class="line">    <span class="string">"""合并函数"""</span></span><br><span class="line">    left_cursor, right_cursor = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> left_cursor &lt; len(left) <span class="keyword">and</span> right_cursor &lt; len(right):</span><br><span class="line">      </span><br><span class="line">        <span class="comment"># 每个分段排序</span></span><br><span class="line">        <span class="keyword">if</span> left[left_cursor] &lt;= right[right_cursor]:</span><br><span class="line">            merged[left_cursor+right_cursor]=left[left_cursor]</span><br><span class="line">            left_cursor += <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            merged[left_cursor + right_cursor] = right[right_cursor]</span><br><span class="line">            right_cursor += <span class="number">1</span></span><br><span class="line">            </span><br><span class="line">    <span class="keyword">for</span> left_cursor <span class="keyword">in</span> range(left_cursor, len(left)):</span><br><span class="line">        merged[left_cursor + right_cursor] = left[left_cursor]</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">for</span> right_cursor <span class="keyword">in</span> range(right_cursor, len(right)):</span><br><span class="line">        merged[left_cursor + right_cursor] = right[right_cursor]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> merged</span><br></pre></td></tr></table></figure>
+<h2 id="快速排序（Quick-Sort）"><a href="#快速排序（Quick-Sort）" class="headerlink" title="快速排序（Quick Sort）"></a>快速排序（Quick Sort）</h2><p>快速排序也是一种分治法（Divide and conquer）的算法，如合并排序。虽然它有点复杂，但在大多数标准实现中，它的执行速度明显快于合并排序，很少达到O（n²）的最坏情况复杂度。主要过程如下：  </p>
+<ol>
+<li>我们首先选择一个元素，称为“基准”（pivot）。  </li>
+<li>重新排序数列，所有比基准值小的元素摆放在基准前面，所有比基准值大的元素摆在基准后面（相同的数可以到任何一边）。在这个分割结束之后，该基准就处于数列的中间位置。这个称为<strong>分割（partition）</strong>操作。</li>
+<li>递归地将上述两个步骤分别应用于每个元素子阵列，把小于基准值元素的子数列和大于基准值元素的子数列排序。<br>递归到最底部时，数列的大小是0或1，也就是已经排序好了。这个算法一定会结束，因为在每次的迭代（iteration）中，它至少会把一个元素摆到它最后的位置去。  </li>
+</ol>
+<p><img src="/images/1/quick_sort.gif" alt="quick_sort">  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">partition</span><span class="params">(array, begin, end)</span>:</span></span><br><span class="line">    pivot_idx = begin</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(begin+<span class="number">1</span>, end+<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> array[i] &lt;= array[begin]:</span><br><span class="line">            pivot_idx += <span class="number">1</span></span><br><span class="line">            array[i], array[pivot_idx] = array[pivot_idx], array[i]</span><br><span class="line">    array[pivot_idx], array[begin] = array[begin], array[pivot_idx]</span><br><span class="line">    <span class="keyword">return</span> pivot_idx</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quick_sort_recursion</span><span class="params">(array, begin, end)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> begin &gt;= end:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    pivot_idx = partition(array, begin, end)</span><br><span class="line">    quick_sort_recursion(array, begin, pivot_idx<span class="number">-1</span>)</span><br><span class="line">    quick_sort_recursion(array, pivot_idx+<span class="number">1</span>, end)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quick_sort</span><span class="params">(array, begin=<span class="number">0</span>, end=None)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> end <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        end = len(array) - <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> quick_sort_recursion(array, begin, end)</span><br></pre></td></tr></table></figure>
+<p>（完）  </p>
+<p><a href="https://medium.com/@george.seif94/a-tour-of-the-top-5-sorting-algorithms-with-python-code-43ea9aa02889" target="_blank" rel="noopener">参考引用:<em>《George Seif：  A tour of the top 5 sorting algorithms with Python code》</em></a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/images/gzh05.jpg" alt="Page Wang wechat" style="width: 200px; max-width: 100%;">
+  <div>欢迎您扫一扫上面的微信公众号，或者搜索公众号"liushuisheng365",订阅我的博客！</div>
+</div>
+
+      </div>
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构与算法/" rel="tag"># 数据结构与算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/python/Python如何给list快速去重/" rel="next" title="Python如何给list去重">
+                <i class="fa fa-chevron-left"></i> Python如何给list去重
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Page Wang">
+            
+              <p class="site-author-name" itemprop="name">Page Wang</p>
+              <div class="site-description motion-element" itemprop="description">光阴似水声，迢迢去未停。用文字留住点滴水声。</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/pagewong" title="GitHub &rarr; https://github.com/pagewong" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:pageone99@gmail.com" title="E-Mail &rarr; mailto:pageone99@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/pagewang6" title="Twitter &rarr; https://twitter.com/pagewang6" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://instagram.com/pagewong" title="Instagram &rarr; https://instagram.com/pagewong" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#冒泡排序（Bubble-Sort）"><span class="nav-number">1.</span> <span class="nav-text">冒泡排序（Bubble Sort）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择排序（Selection-Sort）"><span class="nav-number">2.</span> <span class="nav-text">选择排序（Selection Sort）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入排序（Insertion-Sort）"><span class="nav-number">3.</span> <span class="nav-text">插入排序（Insertion Sort）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#归并排序（Merge-sort）"><span class="nav-number">4.</span> <span class="nav-text">归并排序（Merge sort）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快速排序（Quick-Sort）"><span class="nav-number">5.</span> <span class="nav-text">快速排序（Quick Sort）</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user-circle-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Page Wang</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
